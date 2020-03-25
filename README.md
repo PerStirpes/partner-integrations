@@ -26,7 +26,11 @@ This repository contains our partner integration functions that are hosted withi
 - [room8](./functions-library/sources/room8) - Subscribes to Room8 webhook leads
 - [roomster](./functions-library/sources/roomster) - Subscribes to Roomster webhook leads
 - [LeanPlum](./functions-library/sources/spareroom) - Subscribes to Spareroom webhook leads
-- [template](./functions-library/sources/template) - Just a template `cp -a template <name-of-new-source>`
+- [template](./functions-library/sources/template) - Just a template. 
+
+    ```bash
+    $ cp -a template <name-of-new-source>
+    ```
 
 
 ## Destinations
@@ -34,11 +38,10 @@ This repository contains our partner integration functions that are hosted withi
 - [Requestbin](./destinations/requestbin) - Sends events to RequestBin for introspection
 - [Slack](./destinations/slack) - Adds a Gravatar icon to events with an email and sends messages to Slack
 
-
 ## Development
 
 Run tests with:
 
 ```
-yarn && yarn test
+$ yarn && yarn test
 ```
