@@ -1,4 +1,4 @@
-# Bungalow Partner Integration Endpoint Segment Functions Library
+# Bungalow Partner Integration Segment Functions Library
 
 This repository contains our partner integration functions that are hosted within Bungalow's Segment instance. If you're building out a new partner integration endpoint, or a custom piece of code that you want Segment to run, use this repo as the set of examples.
 
