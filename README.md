@@ -20,12 +20,12 @@ This repository contains our partner integration functions that are hosted withi
 - [4stay](./functions-library/sources/4stay) - Subscribes to 4stay webhook leads
 - [Audit Forwarding](./functions-library/sources/audit-forwarding) - Enhances Segment Audit Forwarding
     - [Protocols: Anomaly Detection](https://segment.com/docs/protocols/anomaly_detection/)
-- [cirtru](./functions-library/sources/cirtru) - Subscribes to Cirtru webhook leads
-- [coliving](./functions-library/sources/coliving) - Subscribes to Co-living webhook leads
-- [domu](./functions-library/sources/domu) - Subscribes to Domu webhook leads
-- [room8](./functions-library/sources/room8) - Subscribes to Room8 webhook leads
-- [roomster](./functions-library/sources/roomster) - Subscribes to Roomster webhook leads
-- [LeanPlum](./functions-library/sources/spareroom) - Subscribes to Spareroom webhook leads
+- [Cirtru](./functions-library/sources/cirtru) - Subscribes to Cirtru webhook leads
+- [Coliving](./functions-library/sources/coliving) - Subscribes to Co-living webhook leads
+- [Domu](./functions-library/sources/domu) - Subscribes to Domu webhook leads
+- [Room8](./functions-library/sources/room8) - Subscribes to Room8 webhook leads
+- [Roomster](./functions-library/sources/roomster) - Subscribes to Roomster webhook leads
+- [Spareroom](./functions-library/sources/spareroom) - Subscribes to Spareroom webhook leads
 - [template](./functions-library/sources/template) - Just a template. 
 
     ```bash
