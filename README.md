@@ -17,16 +17,16 @@ This repository contains our partner integration functions that are hosted withi
 
 ## Sources
 
-- [4stay](./sources/4stay) - Subscribes to 4stay webhook leads
-- [Audit Forwarding](./sources/audit-forwarding) - Enhances Segment Audit Forwarding
+- [4stay](./functions-library/sources/4stay) - Subscribes to 4stay webhook leads
+- [Audit Forwarding](./functions-library/sources/audit-forwarding) - Enhances Segment Audit Forwarding
     - [Protocols: Anomaly Detection](https://segment.com/docs/protocols/anomaly_detection/)
-- [cirtru](./sources/cirtru) - Subscribes to Cirtru webhook leads
-- [coliving](./sources/coliving) - Subscribes to Co-living webhook leads
-- [domu](./sources/domu) - Subscribes to Domu webhook leads
-- [room8](./sources/room8) - Subscribes to Room8 webhook leads
-- [roomster](./sources/roomster) - Subscribes to Roomster webhook leads
-- [LeanPlum](./sources/spareroom) - Subscribes to Spareroom webhook leads
-- [template](./sources/template) - Just a template `cp -a template <name-of-new-source>`
+- [cirtru](./functions-library/sources/cirtru) - Subscribes to Cirtru webhook leads
+- [coliving](./functions-library/sources/coliving) - Subscribes to Co-living webhook leads
+- [domu](./functions-library/sources/domu) - Subscribes to Domu webhook leads
+- [room8](./functions-library/sources/room8) - Subscribes to Room8 webhook leads
+- [roomster](./functions-library/sources/roomster) - Subscribes to Roomster webhook leads
+- [LeanPlum](./functions-library/sources/spareroom) - Subscribes to Spareroom webhook leads
+- [template](./functions-library/sources/template) - Just a template `cp -a template <name-of-new-source>`
 
 
 ## Destinations
