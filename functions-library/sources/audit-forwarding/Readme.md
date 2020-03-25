@@ -1,22 +1,27 @@
-# Audit Forwarding 
+# Audit Forwarding
 
-Audit Forwarding is a fantastic feature offered by Segment. However, there are **two limitations**. 
-  * You can't tell at a glance which workspace user triggered the event 
-  * All events are named 'audit' 
+Audit Forwarding is a fantastic feature offered by Segment. However, there are **two limitations**.
 
-This Custom Source will: 
+- You can't tell at a glance which workspace user triggered the event
+- All events are named 'audit'
+
+This Custom Source will:
+
 1. Fetch the email address of the workspace user who triggered the event
 2. Enhance event names
 
-*Note: The second enhancement allows Slack templates to be much more dynamic and only inlcude relevant fields. This repo includes slack templates you can use!*
- 
+_Note: The second enhancement allows Slack templates to be much more dynamic and only inlcude relevant fields. This repo includes slack templates you can use!_
 
 ## Getting Started
+
 ### Prerequisites
+
 #### Functions Access
+
 You must have to access Functions. To request access to Functions, navigate to the Build page of the catalog [here](https://app.segment.com/goto-my-workspace/build/catalog).
 
 #### Workspace Access Token
+
 You need a workspace access token. As a workspace owner, you can create access tokens via the Access Management page in Admin settings. All tokens are required to have a description.
 
 > Warning: Secret Token
@@ -24,16 +29,18 @@ You need a workspace access token. As a workspace owner, you can create access t
 > Note that you can not retrieve the plain-text `token` later, so you should save it in a secret manager. If you lose the `token` you can generate a new one.
 
 ### Step 1 - Custom Source Setup
+
 1. Navigate to the Build page in the Catalog [here](https://app.segment.com/goto-my-workspace/build/catalog) and click on “Create Source”
 2. Give your Custom Source a name
-2. From the source overview page, click **Write New Function** to open the web editor
-3. Copy the code from the handler.js file in this repo's folder and paste it into the Source Function Editor
-4. Add two settings. To add a setting click on the settings within the Source Function Editor and click **Add a Setting**
-5. Add a `Text input` setting with the name `workspaceSlug` and enter your workspace slug as a value. 
-6. Add a `Text input` setting with the name `workspaceToken` and enter your workspace access token as a value. **Make sure to check the Encypted box!**
-7. Save your Function by pressing the blue **Save** button in the bottom left
+3. From the source overview page, click **Write New Function** to open the web editor
+4. Copy the code from the handler.js file in this repo's folder and paste it into the Source Function Editor
+5. Add two settings. To add a setting click on the settings within the Source Function Editor and click **Add a Setting**
+6. Add a `Text input` setting with the name `workspaceSlug` and enter your workspace slug as a value.
+7. Add a `Text input` setting with the name `workspaceToken` and enter your workspace access token as a value. **Make sure to check the Encypted box!**
+8. Save your Function by pressing the blue **Save** button in the bottom left
 
 ### Step 2 - setup HTTP Source and Webhook
+
 Audit events do not function the same as 'regular' events. Thus you cannot forward Audits events directly to a Custom Source. Therefore we need to set up a Source that will receive the events and forward them to your Custom Source.
 
 1. Create an [HTTP API Source](https://app.segment.com/goto-my-workspace/sources/catalog/http-api)
@@ -41,7 +48,8 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 3. Go to **Settings >> Connection Settings >> Webhooks URL**
 4. Enter the webhook URL from the Custom Source you created in step 1
 
-### Step 3 - Enable Audit Forwarding 
+### Step 3 - Enable Audit Forwarding
+
 1. Go to **Settings >> Audit Forwarding**
 2. Press the dropdown and select the **HTTP API Source** you created in step 2
 3. Toggle the button to enable Audit Forwarding
@@ -49,6 +57,7 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 # Set up Slack!
 
 ## Setup
+
 1. Follow [these instructions](https://segment.com/docs/destinations/slack/#getting-started) to connect your Custom Function to a Slack Destination
 2. For each event template, click **Add another Event Name** to create a new event setting
 3. Enter the **Event Name Regex Pattern** into **Segment Event Name** field
@@ -56,7 +65,9 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 5. Toggle on **Regex Matching**
 
 # Event Templates
+
 ## Audience Events
+
 <table>
   <tr>
     <th>Events</th>
@@ -90,17 +101,16 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*resource_type:* {{properties.details.resource_type}} \n 
-*subject:* {{properties.details.subject}} \n 
-*target:* {{properties.details.target}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*resource_type:* {{properties.details.resource_type}} \n
+*subject:* {{properties.details.subject}} \n
+*target:* {{properties.details.target}} \n
 *timestamp:* {{timestamp}}
 ```
-
 
 ## Computed Trait Events
 
@@ -137,18 +147,19 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*resource_type:* {{properties.details.resource_type}} \n 
-*subject:* {{properties.details.subject}} \n 
-*target:* {{properties.details.target}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*resource_type:* {{properties.details.resource_type}} \n
+*subject:* {{properties.details.subject}} \n
+*target:* {{properties.details.target}} \n
 *timestamp:* {{timestamp}}
-``` 
+```
 
 ## Destination Filter Events
+
 <table>
   <tr>
     <th>Events</th>
@@ -179,19 +190,19 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*resource_type:* {{properties.details.resource_type}} \n 
-*subject:* {{properties.details.subject}} \n 
-*target:* {{properties.details.target}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*resource_type:* {{properties.details.resource_type}} \n
+*subject:* {{properties.details.subject}} \n
+*target:* {{properties.details.target}} \n
 *timestamp:* {{timestamp}}
 ```
 
-
 ## Integrations Events
+
 <table>
   <tr>
     <th>Events</th>
@@ -222,19 +233,20 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}}\n 
-*metadata_id:* {{properties.details.metadata_id}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*source_id:* {{properties.details.source_id}} \n 
-*subject:* {{properties.details.subject}} \n 
-*target:* {{properties.details.target}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}}\n
+*metadata_id:* {{properties.details.metadata_id}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*source_id:* {{properties.details.source_id}} \n
+*subject:* {{properties.details.subject}} \n
+*target:* {{properties.details.target}} \n
 *timestamp:* {{timestamp}}
 ```
 
 ## Personas Warehouse Events
+
 <table>
   <tr>
     <th>Events</th>
@@ -259,14 +271,14 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*resource_type:* {{properties.details.resource_type}} \n 
-*subject:* {{properties.details.subject}} \n 
-*target:* {{properties.details.target}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*resource_type:* {{properties.details.resource_type}} \n
+*subject:* {{properties.details.subject}} \n
+*target:* {{properties.details.target}} \n
 *timestamp:* {{timestamp}}
 ```
 
@@ -359,19 +371,20 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}}\n 
-*description:* {{properties.details.description}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*source_id:* {{properties.details.source_id}} \n 
-*subject:* {{properties.details.subject}} \n 
-*target:* {{properties.details.target}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}}\n
+*description:* {{properties.details.description}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*source_id:* {{properties.details.source_id}} \n
+*subject:* {{properties.details.subject}} \n
+*target:* {{properties.details.target}} \n
 *timestamp:* {{timestamp}}
 ```
 
 ## Source Events
+
 <table>
   <tr>
    <th>Events</th>
@@ -423,22 +436,23 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 ^Source
 ```
 
-### Event Template 
+### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*resource_type:* {{properties.details.resource_type}} \n 
-*source_id:* {{properties.details.source_id}} \n 
-*subject:* {{properties.details.subject}} \n 
-*target:* {{properties.details.target}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*resource_type:* {{properties.details.resource_type}} \n
+*source_id:* {{properties.details.source_id}} \n
+*subject:* {{properties.details.subject}} \n
+*target:* {{properties.details.target}} \n
 *timestamp:* {{timestamp}}
 ```
 
 ## Space Events
+
 <table>
   <tr>
     <th>Events</th>
@@ -463,18 +477,19 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*resource_type:* {{properties.details.resource_type}} \n 
-*subject:* {{properties.details.subject}} \n 
-*target:* {{properties.details.target}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*resource_type:* {{properties.details.resource_type}} \n
+*subject:* {{properties.details.subject}} \n
+*target:* {{properties.details.target}} \n
 *timestamp:* {{timestamp}}
 ```
 
 ## Tracking Plan Events
+
 <table>
   <tr>
     <th>Events</th>
@@ -514,7 +529,6 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
   </tr>
 </table>
 
-
 #### Event Name Regex Pattern
 
 ```
@@ -524,18 +538,19 @@ Audit events do not function the same as 'regular' events. Thus you cannot forwa
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*resource_type:* {{properties.details.resource_type}} \n 
-*subject:* {{properties.details.subject}} \n 
-*target:* {{properties.details.target}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*resource_type:* {{properties.details.resource_type}} \n
+*subject:* {{properties.details.subject}} \n
+*target:* {{properties.details.target}} \n
 *timestamp:* {{timestamp}}
 ```
 
 ## Violation Events
+
 <table>
   <tr>
     <th>Events</th>
@@ -554,18 +569,19 @@ Violations Detected
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*resource_type:* {{properties.details.resource_type}} \n 
-*subject:* {{properties.details.subject}} \n 
-*target:* {{properties.details.target}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*resource_type:* {{properties.details.resource_type}} \n
+*subject:* {{properties.details.subject}} \n
+*target:* {{properties.details.target}} \n
 *timestamp:* {{timestamp}}
 ```
 
 ## Warehouse Events
+
 <table>
   <tr>
     <th>Events</th>
@@ -599,19 +615,20 @@ Violations Detected
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*resource_type:* {{properties.details.resource_type}} \n 
-*subject:* {{properties.details.subject}} \n 
-*target:* {{properties.details.target}} \n 
-*warehouse_id:* {{properties.details.warehouse_id}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*resource_type:* {{properties.details.resource_type}} \n
+*subject:* {{properties.details.subject}} \n
+*target:* {{properties.details.target}} \n
+*warehouse_id:* {{properties.details.warehouse_id}} \n
 *timestamp:* {{timestamp}}
 ```
 
 ## System Events
+
 <table>
   <tr>
     <th>Events</th>
@@ -630,27 +647,28 @@ New Event Allowed
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*system_event:* This event was triggered by the system. \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}} \n 
-*blocked:* {{properties.details.blocked}} \n 
-*message_id:* {{properties.details.message_id}} \n 
-*name:* {{properties.details.name}} \n 
-*planned:* {{properties.details.planned}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*resource_type:* {{properties.details.resource_type}} \n 
-*source_id:* {{properties.details.source_id}} \n 
-*source_name:* {{properties.details.source_name}} \n 
-*source_slug:* {{properties.details.source_slug}} \n 
-*target:* {{properties.details.target}} \n 
-*tracking_plan_connected:* {{properties.details.tracking_plan_connected}} \n 
-*tracking_plan_id:* {{properties.details.tracking_plan_id}} \n 
-*type:* {{properties.details.type}} \n 
+:gear: *{{properties.type}}* \n
+*system_event:* This event was triggered by the system. \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}} \n
+*blocked:* {{properties.details.blocked}} \n
+*message_id:* {{properties.details.message_id}} \n
+*name:* {{properties.details.name}} \n
+*planned:* {{properties.details.planned}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*resource_type:* {{properties.details.resource_type}} \n
+*source_id:* {{properties.details.source_id}} \n
+*source_name:* {{properties.details.source_name}} \n
+*source_slug:* {{properties.details.source_slug}} \n
+*target:* {{properties.details.target}} \n
+*tracking_plan_connected:* {{properties.details.tracking_plan_connected}} \n
+*tracking_plan_id:* {{properties.details.tracking_plan_id}} \n
+*type:* {{properties.details.type}} \n
 *timestamp:* {{timestamp}}
 ```
 
 ## Permission Check Event
+
 <table>
   <tr>
     <th>Events</th>
@@ -669,22 +687,23 @@ Permission Check
 #### Event Template
 
 ```
-:gear: *{{properties.type}}* \n 
-*email:* {{properties.email}} \n 
-*userId:* {{userId}} \n 
-*workspace_id:* {{properties.workspace_id}} \n 
-*action:* {{properties.details.action}} \n 
-*resource_id:* {{properties.details.resource_id}} \n 
-*resource_type:* {{properties.details.resource_type}} \n 
-*sso_connection_id:* {{properties.details.sso_connection_id}} \n 
-*subject_id:* {{properties.details.subject_id}} \n 
-*subject_type:* {{properties.details.subject_type}} \n 
+:gear: *{{properties.type}}* \n
+*email:* {{properties.email}} \n
+*userId:* {{userId}} \n
+*workspace_id:* {{properties.workspace_id}} \n
+*action:* {{properties.details.action}} \n
+*resource_id:* {{properties.details.resource_id}} \n
+*resource_type:* {{properties.details.resource_type}} \n
+*sso_connection_id:* {{properties.details.sso_connection_id}} \n
+*subject_id:* {{properties.details.subject_id}} \n
+*subject_type:* {{properties.details.subject_type}} \n
 *timestamp:* {{timestamp}}
 ```
 
 ## Want to Block Permission Check Events?
 
 Uncomment the following code that is already in the Custom Source Function code.
+
 ```
 if (requestBody.properties.type === 'Permission Check') {
   return;
