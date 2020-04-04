@@ -1,6 +1,6 @@
 # Partner Integration Function Library
 
-This repository contains our partner integration functions that are hosted within Bungalow's  instance. If you're building out a new partner integration endpoint, or a custom piece of code that you want Segment to run, use this repo as the set of examples.
+This repository contains partner integration functions. If you're building out a new partner integration endpoint, or a custom piece of code that you want to run a serverless functions use this repo as the set of examples.
 
 ## Adding a new partner
 1. Create a source function. Start with the template example and code away.
