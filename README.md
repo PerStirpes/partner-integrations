@@ -1,10 +1,10 @@
-# Bungalow Partner Integration Segment Functions Library
+# Partner Integration Function Library
 
-This repository contains our partner integration functions that are hosted within Bungalow's Segment instance. If you're building out a new partner integration endpoint, or a custom piece of code that you want Segment to run, use this repo as the set of examples.
+This repository contains our partner integration functions that are hosted within Bungalow's  instance. If you're building out a new partner integration endpoint, or a custom piece of code that you want Segment to run, use this repo as the set of examples.
 
 ## Adding a new partner
-1. Create a source function within [Segment](https://app.segment.com/bungalow/functions/catalog). Start with the template example and code away.
-2. Add the function to this repo by copying the template run `$ cp -a template <name-of-new-source>` and paste your code from Segment
+1. Create a source function. Start with the template example and code away.
+2. Add the function to this repo by copying the template run `$ cp -a template <name-of-new-source>` and paste your code into the editor
 
 
 
