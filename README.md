@@ -4,18 +4,8 @@ This repository contains partner integration functions. If you're building out a
 
 ## Adding a new partner
 1. Create a source function. Start with the template example and code away.
-2. Add the function to this repo by copying the template run `$ cp -a template <name-of-new-source>` and paste your code into the editor
+2. Add the function to this repo by copying the template run `$ cp -a template <name-of-new-source>` and paste your code into your editor
 
-
-
-
-## Docs 
-- [Source Functions](https://segment.com/docs/connections/sources/source-functions/#source%20functions)
-- [Destination Functions](https://segment.com/docs/connections/destinations/destination-functions/#destination%20functions)
-- [Custom Destinations: Functions](https://segment.com/docs/connections/destinations/custom-destinations/#custom%20destinations:%20functions)
-- [Building a Subscription Function](https://segment.com/docs/partners/build-functions/) 
-
-## Sources
 
 - [4stay](./functions-library/sources/4stay) - Subscribes to 4stay webhook leads
 - [Audit Forwarding](./functions-library/sources/audit-forwarding) - Enhances Segment Audit Forwarding
