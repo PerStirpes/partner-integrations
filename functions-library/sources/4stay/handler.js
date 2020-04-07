@@ -1,9 +1,23 @@
 /**
- * Please do not delete [used for Intellisense]
  * @param {ServerRequest} request The incoming webhook request
  * @param {Object.<string, any>} settings Custom settings
  * @return void
  */
+
+const getUrlWithParams = (url: string, params: any) => {
+  if (url.includes('?')) url += '?';
+  url += Object.keys(params)
+    .map((key) => key + '=' + params[key])
+    .join('&');
+  return url;
+};
+
+// deep copy a message
+const copy = (message: any) => {
+  return JSON.parse(JSON.stringify(message));
+};
+
+
 async function onRequest(request, settings) {
     // get request body, header, and query string parameter
     const requestBody = request.json()
